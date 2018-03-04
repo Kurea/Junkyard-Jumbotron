@@ -20,7 +20,7 @@ node-packages:
 	$(NPM) install formidable@0.9.11
 	$(NPM) install gently@0.8.0
 	$(NPM) install gm@0.4.0
-	$(NPM) install iconv@1.0.0
+	$(NPM) install iconv@1.2.0
 	$(NPM) install jade@0.9.1
 	$(NPM) install log4js@0.2.3
 	$(NPM) install node-dev@0.1.5

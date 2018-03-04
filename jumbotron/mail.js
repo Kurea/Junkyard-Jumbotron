@@ -8,7 +8,7 @@ var params = require('./params');
 var utils = require('./utils');
 
 var formidable = require('formidable');
-var mailparser = require('mailparser');
+var mailparser = '';//require('mailparser');
 var Email = require('email').Email;
 
 function MailParser() {
