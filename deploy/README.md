@@ -31,7 +31,8 @@ the jumbotron home directory.
    * If using [init.d](http://www.ghacks.net/2009/04/04/get-to-know-linux-the-etcinitd-directory/)
      1. Copy init.d.example to /etc/init.d/jumbotron.
      2. Edit the DAEMON_DIR variable to point to jumbotron home.
-     3. Use _/etc/init.d/jumbotron <start|stop|restart|status>_
+     3. Run *systemctl daemon-reload* to reload deamons
+     4. Use _/etc/init.d/jumbotron <start|stop|restart|status>_
 
 3. Setup Mail Server
 --------------------
@@ -45,4 +46,3 @@ the jumbotron home directory.
    * Setup a catchall that sends all mail to user jumbotron.
      We use a setting in _/etc/mail/virusertable_:
      >@thisserver.com	jumbotron
-
