@@ -471,7 +471,7 @@ $.fn.ajaxForm = function(options) {
 	}).bind('click.form-plugin', function(e) {
 		var target = e.target;
 		var $el = $(target);
-		if (!($el.is(":submit,input:image") || $el.is(":submit,input:video") )) {
+		if (!($el.is(":submit,input:image") || $el.is(":submit,input:image") )) {
 			// is this a child element of the submit el?  (ex: a span within a button)
 			var t = $el.closest(':submit');
 			if (t.length == 0) {

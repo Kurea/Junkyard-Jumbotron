@@ -93,7 +93,7 @@ module.exports = function staticProvider(options){
 
             // Pass through for missing files, thow error for other problems
             if (err) {
-                return err.errno === process.ENOENT
+                return err.code == "ENOENT"
                     ? next()
                     : next(err);
             } else if (stat.isDirectory()) {
