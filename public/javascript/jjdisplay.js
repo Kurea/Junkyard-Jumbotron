@@ -9,7 +9,7 @@ media = document.createElement('video');
 media.preload = true;
 //media.controls = true;
 media.className = 'c1';
-media.id = 'it'; 
+media.id = 'it';
 document.getElementById('crop').appendChild(media);
 //media.loop = true;
 //media.autoplay = true;
@@ -83,7 +83,7 @@ function Display() {
     this.image.onerror = bind(this, this.onImageError);
     this.viewport = new Viewport();
     this.frozen = false; // Can we pan and zoom?
-    
+
     this.firstMouseX = 0;
     this.firstMouseY = 0;
     this.lastTranslateX = 0;
@@ -139,7 +139,7 @@ $.extend(Display.prototype, {
   // img.width = this.image.videoWidth;
     //}
 	if (!document.getElementById('placeholder')){// || !img.width || !img.height){
-    return;	   
+    return;
     }
 	// Cache for speed
 	var round = Math.round;
@@ -156,17 +156,9 @@ $.extend(Display.prototype, {
 	    docHeight = $(window).height();
 	}
 
-	// if fitMode = stretch calculate both
-  // if fitMode = vertical scaleX = scaleY
-  // if fitMode = horizontal scaleY = sclaeX
 	// Amount the image needs to be scaled
 	var scaleX = docWidth  / vp.width;
 	var scaleY = docHeight / vp.height;
-
-  if (vp.fitMode == 'vertical')
-    scaleX = scaleY;
-  if (vp.fitMode == 'horizontal')
-    scaleY = scaleX;
 
 	// Final image size
 	//var imgWidth  = round(img.width  * scaleX);
@@ -198,14 +190,22 @@ $.extend(Display.prototype, {
 	// it occasionally is displayed with the old xform. Another
 	// solution might be to create an entirely new <img> element
 	// when a new image arrives and swap it in for the old one.
-    
+
+  // if fitMode = stretch keep both
+  // if fitMode = vertical scaleX = scaleY
+  // if fitMode = horizontal scaleY = sclaeX
+  if (vp.fitMode == 'vertical')
+    scaleX = scaleY;
+  if (vp.fitMode == 'horizontal')
+    scaleY = scaleX;
+
     if (this.image.src.indexOf('markers') != -1){
     var scaleString = 'scale(1, 1)';
     }
     else{
     var scaleString = 'scale('+scaleX+', '+scaleY+')'
     }
-    
+
 	//var bgPosStr  = marginX  + 'px ' + marginY   + 'px';
 	//var bgSizeStr = imgWidth + 'px ' + imgHeight + 'px';
 
@@ -218,10 +218,10 @@ $.extend(Display.prototype, {
         '-webkit-transform'        : scaleString,
         '-moz-transform'           : scaleString,
         '-o-transform'	           : scaleString,
-        '-transform-origin'        : 'top left', 
-        '-webkit-transform-origin' : 'top left', 
-        '-moz--transform-origin'   : 'top left', 
-        '-o-transform-origin'      : 'top left', 
+        '-transform-origin'        : 'top left',
+        '-webkit-transform-origin' : 'top left',
+        '-moz--transform-origin'   : 'top left',
+        '-o-transform-origin'      : 'top left',
 			 });
 
 	/*this.imgElem.css({ 'width'  : imgWidth  + 'px',
@@ -248,7 +248,7 @@ $.extend(Display.prototype, {
 		    });
 */
     },
-    
+
     translateViewport: function translateViewport(x, y) {
 
 	// For consistency with how scaling is done, store last values,
@@ -336,7 +336,7 @@ $.extend(Display.prototype, {
     handleResize: function handleResize() {
 	// Update css, update image transform, and notify the server
 	//$('#finalcrop').css({'width' : '100%',//$(window).width() + 'px',
-			//     'height': '100%'});//$(window).height() + 'px'}); 
+			//     'height': '100%'});//$(window).height() + 'px'});
 	this.transformImg();
 	this.sendSizeMsg();
     },
@@ -477,7 +477,7 @@ $.extend(Display.prototype, {
     },
 
     // ----------------------------------------------------------------------
-    // Communication 
+    // Communication
 
     sendInitMsg: function sendInitMsg() {
 	var id = $.cookie('jjid');
@@ -501,7 +501,7 @@ $.extend(Display.prototype, {
 	    this.viewportMsgScheduled = setTimeout(
 		bind(this, this.sendViewportMsg), 100);
     },
-    
+
     sendSizeMsg: function sendSizeMsg() {
 	var docWidth  = $(window).width();
 	var docHeight = $(window).height();
@@ -534,7 +534,7 @@ $.extend(Display.prototype, {
                 this.image = new Image();
                 this.image.id = 'it';
                 this.image.className = 'c1';
-                this.image.src = args.src;  
+                this.image.src = args.src;
                 this.image.loop = true;
                 //this.image.height = args.vp.height;
                // this.image.width = args.vp.width;
@@ -573,13 +573,13 @@ $.extend(Display.prototype, {
                     //s2.type='video/mp4';
                    // console.log(s2);
                     this.image.appendChild(s2);
-                    this.image.appendChild(s);   
+                    this.image.appendChild(s);
 
                     var trickery = document.createElement('div');
                 trickery.id = 'placeholder';
-                div.appendChild(trickery);//checks that src exists                 
+                div.appendChild(trickery);//checks that src exists
             }
-            
+
         }
         this.onImageLoad();
         this.mode = 'idle';
@@ -596,7 +596,7 @@ $.extend(Display.prototype, {
 	vp: function vp(args) {
 	    // Ignore changes while interacting or loading an image
 	    if (! this.viewport.equals(args) &&
-		(this.mode == 'idle' || this.mode == 'loading') && 
+		(this.mode == 'idle' || this.mode == 'loading') &&
 		! this.viewportMsgScheduled) {
 		this.viewport = new Viewport(args);
 		if (this.mode == 'idle')
@@ -614,7 +614,7 @@ $.extend(Display.prototype, {
 	}
 
     }
-    
+
 });
 
 // ----------------------------------------------------------------------
