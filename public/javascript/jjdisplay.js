@@ -159,7 +159,7 @@ $.extend(Display.prototype, {
 	var scaleY = docHeight / vp.height;
 
 	// Final image size
-//	var imgWidth  = round(img.width  * scaleX);
+	//var imgWidth  = round(img.width  * scaleX);
 	//var imgHeight = round(img.height * scaleY);
 
 	// Margins to push the image into place
@@ -196,23 +196,27 @@ $.extend(Display.prototype, {
     var scaleString = 'scale('+scaleX+', '+scaleY+')'
     }
     
-	var bgPosStr  = marginX  + 'px ' + marginY   + 'px';
+	//var bgPosStr  = marginX  + 'px ' + marginY   + 'px';
 	//var bgSizeStr = imgWidth + 'px ' + imgHeight + 'px';
 
 
-    $('#it').css({ 
-	   'position'	: 'absolute',
-	   'margin-left' : marginX +'px',
-        'margin-top' : marginY+'px',
-        'transform' : scaleString,
-	   '-webkit-transform'	: scaleString,
-	   '-moz-transform'	: scaleString,
-	   '-o-transform'	: scaleString,
+    $('#it').css({
+	'position'                 : 'absolute',
+	'margin-left'              : marginX +'px',
+        'margin-top'               : marginY+'px',
+        'transform'                : scaleString,
+        '-webkit-transform'        : scaleString,
+        '-moz-transform'           : scaleString,
+        '-o-transform'	           : scaleString,
+        '-transform-origin'        : 'top left', 
+        '-webkit-transform-origin' : 'top left', 
+        '-moz--transform-origin'   : 'top left', 
+        '-o-transform-origin'      : 'top left', 
 			 });
 
-	/*this.imgElem.css({ width  : docWidth  + 'px',
-			   height : docHeight + 'px',
-			   'background-image'		: video,
+	/*this.imgElem.css({ 'width'  : imgWidth  + 'px',
+			   'height' : imgHeight + 'px',
+			   'background-image'		: 'url(' + img.src + ')',
 			   'background-position'	: bgPosStr,
 			   'background-size'		: bgSizeStr,
 			   '-webkit-background-size'	: bgSizeStr,
@@ -220,19 +224,19 @@ $.extend(Display.prototype, {
 			   '-o-background-size'		: bgSizeStr
 			 });
 
-	/*
+
 	console.log({ docWidth : docWidth + 'px',
 		      docHeight : docHeight + 'px',
-		      imgWidth : img.width,
-		      imgHeight : img.height,
+		      //imgWidth : img.width,
+		      //imgHeight : img.height,
 		      scaleX: scaleX,
 		      scaleY: scaleY,
 		      vp: vp,
 		      'background-image'   : 'url(' + img.src + ')',
 		      'background-position': marginX + 'px ' + marginY + 'px',
-		      'background-size'    : imgWidth + 'px ' + imgHeight + 'px'
+		      //'background-size'    : imgWidth + 'px ' + imgHeight + 'px'
 		    });
-	*/
+*/
     },
     
     translateViewport: function translateViewport(x, y) {
@@ -516,7 +520,7 @@ $.extend(Display.prototype, {
 		    this.viewport = new Viewport(args.vp);
             var oktypes = {'.jpg':1, '.gif':1, '.png':1};
             var type = args.src.slice(args.src.lastIndexOf('.'));
-            if (type in oktypes){
+            if (type.toLowerCase() in oktypes){
                 this.image = new Image();
                 this.image.id = 'it';
                 this.image.className = 'c1';
@@ -539,7 +543,7 @@ $.extend(Display.prototype, {
         	    this.image.src = args.src;
             }*/
             else{
-                var blankPath = 'http://' + window.location.hostname + ':8090/' + args.src.slice(0, args.src.lastIndexOf('.'));
+                var blankPath = 'http://' + window.location.hostname + ':' + window.location.port + '/' + args.src.slice(0, args.src.lastIndexOf('.'));
                 var div = document.getElementById('crop');
                 console.log(blankPath);
                 $(div).empty();

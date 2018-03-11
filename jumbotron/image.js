@@ -150,7 +150,7 @@ Image.getSampleImageFiles = function getSampleImageFiles(cb) {
 	var legitExtensions =  {'.jpg':1, '.gif':1, '.png':1, '.ogv':1, '.mp4':1, '.mpeg':1 };
 	var fullFiles = [];
 	for (var f = 0; f < files.length; f++) {
-	    if (path.extname(files[f]) in legitExtensions)
+	    if (path.extname(files[f]).toLowerCase() in legitExtensions)
 		fullFiles.push(path.join(params.samplesDir, files[f]));
 	}
 	cb(null, fullFiles);

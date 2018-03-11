@@ -110,7 +110,7 @@ def detect(image, confidence_threshold=0.5, debug=False, debug_image=False):
     allmarkers = {}
 
     # Systematically try different thresholds
-    data = grayimage.tostring()
+    data = grayimage.tobytes()
     for thresh in xrange(16, 255, 16):
 
         # Set the current threshold and extract the markers

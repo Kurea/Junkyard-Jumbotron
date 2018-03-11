@@ -117,7 +117,7 @@ module.exports = {
     imageReceiveServer: '@thisserver.com',
 	
     // Debug level 'INFO', 'DEBUG', 'TRACE'
-    debug: 'DEBUG'
+    debug: 'TRACE'
 };
 
 // Merge in local changes, if any
