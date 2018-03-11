@@ -41,6 +41,7 @@ need to install Python 2.6 or 2.7 from their [downloads page](http://www.python.
 To support the image processing you also need the
 ~~[Python Imaging Library](http://www.pythonware.com/products/pil/).~~
 PIL is know deprecated use [pillow](https://pillow.readthedocs.io/en/latest/) instead.
+Note : install it for all users
 
 You also need to compile the ARToolkit, which is included in the repo:
 
@@ -68,6 +69,7 @@ can install them all by running this command:
 To manage video instead of phots
 
     > sudo apt install ffmpeg
+    > sudo apt install ffmpeg2theora
 
 
 7. Run It!

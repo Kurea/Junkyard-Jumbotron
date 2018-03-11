@@ -31,6 +31,8 @@ function Viewport(options) {
 
     // Rotation: 0=up 1=90deg 2=180deg 3=270deg
     this.rotation = options.rotation || 0;
+
+    this.fitMode = options.fitMode || 'stretch';
 }
 
 Viewport.prototype = {
@@ -50,13 +52,13 @@ Viewport.prototype = {
     string: function string() {
 	return ('' + this.x + ',' + this.y +
 		' ' + this.width + 'x' + this.height +
-		' (' + this.rotation + ')');
+		' (' + this.rotation + ' - ' / this.fitMode + ')');
     },
 
     equals: function equals(other) {
 	return (this.x == other.x && this.y == other.y &&
 		this.width == other.width && this.height == other.height &&
-		this.rotation == other.rotation);
+		this.rotation == other.rotation && this.fitMode == other.fitMode);
     },
 
     isSideways: function isSideways() {
@@ -154,9 +156,17 @@ $.extend(Display.prototype, {
 	    docHeight = $(window).height();
 	}
 
+	// if fitMode = stretch calculate both
+  // if fitMode = vertical scaleX = scaleY
+  // if fitMode = horizontal scaleY = sclaeX
 	// Amount the image needs to be scaled
 	var scaleX = docWidth  / vp.width;
 	var scaleY = docHeight / vp.height;
+
+  if (vp.fitMode == 'vertical')
+    scaleX = scaleY;
+  if (vp.fitMode == 'horizontal')
+    scaleY = scaleX;
 
 	// Final image size
 	//var imgWidth  = round(img.width  * scaleX);

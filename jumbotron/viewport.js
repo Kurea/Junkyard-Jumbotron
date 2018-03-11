@@ -15,18 +15,22 @@ function Viewport(options) {
 
     // Rotation: 0=up 1=90deg 2=180deg 3=270deg
     this.rotation = options.rotation || 0;
+
+    this.fitMode = options.fitMode || 'stretch';
 }
 
 // Members
 Viewport.prototype = {
 
-    set: function set(x, y, width, height, rotation) {
+    set: function set(x, y, width, height, rotation, fitMode) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
 	if (rotation)
 	    this.rotation = rotation;
+  if (fitMode)
+      this.firMode = fitMode;
     },
 
     copy: function copy(other) {
@@ -35,6 +39,7 @@ Viewport.prototype = {
 	this.width = other.width;
 	this.height = other.height;
 	this.rotation = other.rotation;
+  this.fitMode = other.fitMode;
     },
 
     clone: function clone() {
@@ -58,13 +63,13 @@ Viewport.prototype = {
     toString: function toString() {
 	return (this.x + ',' + this.y
 		+ ' ' + this.width + 'x' + this.height
-		+ ' (' + this.rotation + ')');
+		+ ' (' + this.rotation + ' - ' / this.fitMode + ')');
     },
 
     equals: function equals(other) {
 	return (this.x == other.x && this.y == other.y &&
 		this.width == other.width && this.height == other.height &&
-		this.rotation == other.rotation);
+		this.rotation == other.rotation && this.fitMode == other.fitMode);
     },
 
     isEmpty: function isEmpty() {
@@ -84,7 +89,8 @@ Viewport.prototype = {
 			      y: round(crop.y * this.height + this.y),
 			      width: round(crop.width  * this.width),
 			      height: round(crop.height * this.height),
-			      rotation: crop.rotation });
+			      rotation: crop.rotation,
+            fitMode: this.fitMode });
     },
 
     // Return a new viewport of which this viewport is a crop, where
@@ -98,7 +104,8 @@ Viewport.prototype = {
 			      y: round(this.y - crop.y * height),
 			      width: round(width),
 			      height: round(height),
-			      rotation: this.rotation });
+			      rotation: this.rotation,
+            fitMode: this.fitMode });
     },
 
     // Return a new viewport which is a subset or superset of this
@@ -118,6 +125,7 @@ Viewport.prototype = {
 	    fitMode = (thisAr < dstAr ? 'vertical' : 'horizontal');
 
 	var vp = this.clone();
+  vp.fitMode = fitMode;
 	if (fitMode == 'horizontal') {
 	    vp.height = this.width / dstAr;
 	    vp.y += Math.round(0.5 * (this.height - vp.height));
