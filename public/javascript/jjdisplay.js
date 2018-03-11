@@ -191,18 +191,18 @@ $.extend(Display.prototype, {
 	// solution might be to create an entirely new <img> element
 	// when a new image arrives and swap it in for the old one.
 
-  // if fitMode = stretch keep both
-  // if fitMode = vertical scaleX = scaleY
-  // if fitMode = horizontal scaleY = sclaeX
-  if (vp.fitMode == 'vertical')
-    scaleX = scaleY;
-  if (vp.fitMode == 'horizontal')
-    scaleY = scaleX;
-
     if (this.image.src.indexOf('markers') != -1){
     var scaleString = 'scale(1, 1)';
     }
     else{
+    // if fitMode = stretch keep both
+    // if fitMode = vertical scaleX = scaleY
+    // if fitMode = horizontal scaleY = sclaeX
+    if (vp.fitMode == 'vertical')
+      scaleX = scaleY;
+    if (vp.fitMode == 'horizontal')
+      scaleY = scaleX;
+
     var scaleString = 'scale('+scaleX+', '+scaleY+')'
     }
 
@@ -492,7 +492,7 @@ $.extend(Display.prototype, {
 	this.viewportMsgScheduled = null;
 	var vp = this.viewport;
 	this.sendMsg('vp', {
-	    x: vp.x, y: vp.y, width: vp.width, height: vp.height });
+	    x: vp.x, y: vp.y, width: vp.width, height: vp.height, fitMode: vp.fitMode });
     },
 
     scheduleViewportMsg: function scheduleViewportMsg() {

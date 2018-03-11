@@ -128,11 +128,11 @@ Viewport.prototype = {
   vp.fitMode = fitMode;
 	if (fitMode == 'horizontal') {
 	    vp.height = this.width / dstAr;
-	    vp.y += Math.round(0.5 * (this.height - vp.height));
+	    //vp.y += Math.round(0.5 * (this.height - vp.height));
 	}
 	else if  (fitMode == 'vertical') {
 	    vp.width = this.height * dstAr;
-	    vp.x += Math.round(0.5 * (this.width - vp.width));
+	    //vp.x += Math.round(0.5 * (this.width - vp.width));
 	}
 	// else (fitMode == 'stretch'), don't do anything
 
