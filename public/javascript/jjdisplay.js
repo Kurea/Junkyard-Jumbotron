@@ -192,7 +192,13 @@ $.extend(Display.prototype, {
 	// when a new image arrives and swap it in for the old one.
 
     if (this.image.src.indexOf('markers') != -1){
-    var scaleString = 'scale(1, 1)';
+      var scaleString = 'scale(1, 1) translate(-50%,-50%)';
+      $('#it').css({
+          'max-height':'100%',
+          'max-width': '100%',
+          'left': '50%',
+          'top': '50%'
+      });
     }
     else{
     // if fitMode = stretch keep both

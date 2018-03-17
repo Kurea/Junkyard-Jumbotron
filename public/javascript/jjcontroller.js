@@ -16,7 +16,7 @@ var localizeTable = {
 
     'need name'	: "Please enter a name for the Jumbotron",
     'bad name'	: "Jumbotron names must begin with a letter or number"
-	+ " and may contain only letters, numbers, dashes, and underscores",
+	+ " and may contain only lowercase letters, numbers, dashes, and underscores",
     'duplicate'	: "A Jumbotron named {0} already exists, would you like to control it?",
     'no jumbotron': "No Jumbotron named {0} exists.",
 
@@ -53,7 +53,7 @@ $.extend(Controller.prototype, {
     // Utilites
 
     isValidJumbotronName: function isValidJumbotronName(name) {
-	var regExp = /^[a-zA-Z0-9][a-zA-Z0-9_-]*$/;
+	var regExp = /^[a-z0-9][a-z0-9_-]*$/;
 	return regExp.test(name);
     },
 

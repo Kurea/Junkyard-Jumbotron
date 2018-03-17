@@ -30,7 +30,7 @@ Viewport.prototype = {
 	if (rotation)
 	    this.rotation = rotation;
   if (fitMode)
-      this.firMode = fitMode;
+      this.fitMode = fitMode;
     },
 
     copy: function copy(other) {
